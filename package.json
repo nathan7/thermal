@@ -1,0 +1,25 @@
+{
+  "name": "thermal",
+  "version": "0.0.0",
+  "description": "thermal printer driver (CSN-A2-T and compatibles)",
+  "main": "index.js",
+  "dependencies": {
+    "serialport-stream": "~1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nathan7/thermal.git"
+  },
+  "keywords": [
+    "thermal",
+    "printer",
+    "receipt",
+    "driver"
+  ],
+  "author": "Nathan Zadoks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nathan7/thermal/issues"
+  },
+  "homepage": "https://github.com/nathan7/thermal"
+}
