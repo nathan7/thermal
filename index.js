@@ -19,6 +19,29 @@ var defaults =
     , textHeight: 's'
     }
 
+var barcodeTypes =
+    [ 'UPC-A'
+    , 'UPC-E'
+    , 'EAN-13'
+    , 'EAN-8'
+    , 'CODE-39'
+    , 'I-25'
+    , 'CODEBAR'
+    , 'CODE-93'
+    , 'CODE-128'
+    , 'CODE-11'
+    , 'MSI'
+    ]
+    , barcodeTypesObj = {}
+
+barcodeTypes.forEach(function(name) {
+  barcodeTypesObj[simplify(name)] = true
+})
+
+function simplify(name) {
+  return (name + '').toLowerCase().replace(/[^a-z0-9]/g)
+}
+
 function ord(c) { return String(c).charCodeAt(0) }
 var SO = 14
   , DC2 = 18
@@ -130,4 +153,13 @@ Thermal.prototype.wake = function() {
 Thermal.prototype.sleep = function() {
   WritableStream.prototype.write.call(this, new Buffer([ESC, 61, 0]))
   this.awake = false
+}
+
+Thermal.prototype.writeBarcode = function(code, type) {
+  type = simplify(type || 'EAN-13')
+  var index = barcodeTypes.indexOf(type)
+  if (index === -1)
+    throw new Error('unknown bar code type \'' + code + '\'')
+  this.write(new Buffer([GS, ord('k'), index]))
+  return this.write(code + '\0')
 }
