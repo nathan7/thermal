@@ -6,6 +6,12 @@
   "dependencies": {
     "serialport-stream": "~1.0.1"
   },
+  "scripts": {
+    "test": "standard"
+  },
+  "devDependencies": {
+    "standard": "^5.0.2"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/nathan7/thermal.git"
