@@ -27,7 +27,7 @@ barcodeTypes.forEach(function (name) {
 })
 
 function simplify (name) {
-  return (name + '').toLowerCase().replace(/[^a-z0-9]/g)
+  return (name + '').toLowerCase().replace(/[^a-z0-9]/g, '')
 }
 
 function ord (c) { return String(c).charCodeAt(0) }
