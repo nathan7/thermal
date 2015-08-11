@@ -1,6 +1,6 @@
 {
   "name": "thermal",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "thermal printer driver (CSN-A2-T and compatibles)",
   "main": "index.js",
   "dependencies": {
