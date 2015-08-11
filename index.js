@@ -20,11 +20,10 @@ var defaults = {
 }
 
 var barcodeTypes = ['UPC-A', 'UPC-E', 'EAN-13', 'EAN-8', 'CODE-39', 'I-25', 'CODEBAR', 'CODE-93', 'CODE-128', 'CODE-11', 'MSI']
-var barcodeTypesObj = {}
-
-barcodeTypes.forEach(function (name) {
-  barcodeTypesObj[simplify(name)] = true
-})
+var barcodeTypesObj = barcodeTypes.reduce(function (acc, name, index) {
+  acc[simplify(name)] = index
+  return acc
+}, Object.create(null))
 
 function simplify (name) {
   return (name + '').toLowerCase().replace(/[^a-z0-9]/g, '')
@@ -155,8 +154,8 @@ Thermal.prototype.sleep = function () {
 
 Thermal.prototype.writeBarcode = function (code, type) {
   type = simplify(type || 'EAN-13')
-  var index = barcodeTypes.indexOf(type)
-  if (index === -1) {
+  var index = barcodeTypesObj[type]
+  if (index === undefined) {
     throw new Error("unknown bar code type '" + code + "'")
   }
   this.write(new Buffer([GS, ord('k'), index]))
